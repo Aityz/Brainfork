@@ -24,7 +24,7 @@ extern "C" {
     fn read(fd: i32, char: &mut u8, amount: i32);
 }
 
-#[cfg(unix)]
+#[cfg(target_os = "linux")]
 fn init() {
     let fd = std::os::fd::AsRawFd::as_raw_fd(&std::io::stdout()); // most likely 0
 
@@ -39,12 +39,12 @@ fn init() {
     }
 }
 
-#[cfg(not(unix))]
+#[cfg(not(target_os = "linux"))]
 fn init() {
-    // add windows support later
+    // add windows and macos support later
 }
 
-#[cfg(unix)]
+#[cfg(target_os = "linux")]
 fn close() {
     let fd = std::os::fd::AsRawFd::as_raw_fd(&std::io::stdout());
 
@@ -59,7 +59,7 @@ fn close() {
     }
 }
 
-#[cfg(not(unix))]
+#[cfg(not(target_os = "linux"))]
 fn close() {
     // add windows support later
 }
@@ -68,7 +68,7 @@ fn close() {
 #[inline(always)]
 fn inc_one(ptr: &mut u16, _stack: &Vec<u8>) {
     if *ptr == 29999 {
-        println!("Trying to access out-of-bounds memory!");
+        *ptr = 0;
     } else {
         *ptr += 1;
     }
@@ -77,7 +77,7 @@ fn inc_one(ptr: &mut u16, _stack: &Vec<u8>) {
 #[inline(always)]
 fn dec_one(ptr: &mut u16, _stack: &Vec<u8>) {
     if *ptr == 0 {
-        println!("Trying to access out-of-bounds memory!");
+        *ptr = 29999;
     } else {
         *ptr -= 1;
     }
