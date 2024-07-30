@@ -85,12 +85,20 @@ fn dec_one(ptr: &mut u16, _stack: &Vec<u8>) {
 
 #[inline(always)]
 fn inc_val(ptr: &mut u16, stack: &mut Vec<u8>) {
-    stack[*ptr as usize] += 1;
+    if stack[*ptr as usize] == 255 {
+        stack[*ptr as usize] = 0;
+    } else {
+        stack[*ptr as usize] += 1;
+    }
 }
 
 #[inline(always)]
 fn dec_val(ptr: &mut u16, stack: &mut Vec<u8>) {
-    stack[*ptr as usize] -= 1;
+    if stack[*ptr as usize] == 0 {
+        stack[*ptr as usize] = 255;
+    } else {
+        stack[*ptr as usize] -= 1;
+    }
 }
 
 #[inline(always)]
