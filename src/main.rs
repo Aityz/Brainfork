@@ -46,10 +46,10 @@ fn main() -> Result<(), std::io::Error> {
     for char in file.chars() {
         match char {
             '>' => {
-                lines.push("inc_one(&mut ptr, &mut stack);".to_string());
+                lines.push("inc_one(&mut ptr, &stack);".to_string());
             }
             '<' => {
-                lines.push("dec_one(&mut ptr, &mut stack);".to_string());
+                lines.push("dec_one(&mut ptr, &stack);".to_string());
             }
             '+' => {
                 lines.push("inc_val(&mut ptr, &mut stack);".to_string());
@@ -58,7 +58,7 @@ fn main() -> Result<(), std::io::Error> {
                 lines.push("dec_val(&mut ptr, &mut stack);".to_string());
             }
             '.' => {
-                lines.push("print_val(&mut ptr, &mut stack);".to_string());
+                lines.push("print_val(&mut ptr, &stack);".to_string());
             }
             ',' => {
                 lines.push("read_val(&mut ptr, &mut stack);".to_string());

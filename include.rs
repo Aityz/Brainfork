@@ -66,21 +66,21 @@ fn close() {
 
 
 #[inline(always)]
-fn inc_one(ptr: &mut u16, _stack: &mut Vec<u8>) {
+fn inc_one(ptr: &mut u16, _stack: &Vec<u8>) {
     if *ptr == 29999 {
         println!("Trying to access out-of-bounds memory!");
-        std::process::exit(1);
+    } else {
+        *ptr += 1;
     }
-    *ptr += 1;
 }
 
 #[inline(always)]
-fn dec_one(ptr: &mut u16, _stack: &mut Vec<u8>) {
-    if *ptr == 29999 {
+fn dec_one(ptr: &mut u16, _stack: &Vec<u8>) {
+    if *ptr == 0 {
         println!("Trying to access out-of-bounds memory!");
-        std::process::exit(1);
+    } else {
+        *ptr -= 1;
     }
-    *ptr -= 1;
 }
 
 #[inline(always)]
@@ -94,7 +94,7 @@ fn dec_val(ptr: &mut u16, stack: &mut Vec<u8>) {
 }
 
 #[inline(always)]
-fn print_val(ptr: &mut u16, stack: &mut Vec<u8>) {
+fn print_val(ptr: &mut u16, stack: &Vec<u8>) {
     print!("{}", char::from(stack[*ptr as usize]));
     std::io::Write::flush(&mut std::io::stdout()).unwrap_or_else(|_| {
         println!("Failed to flush Stdout!");
