@@ -2,5 +2,10 @@
 name = "brainfork"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "A compiler for Brainfuck written in Rust"
+homepage = "https://github.com/Aityz/Brainfork"
+repository = "https://github.com/Aityz/Brainfork"
+readme = "README.md"
 
 [dependencies]

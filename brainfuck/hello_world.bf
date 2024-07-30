@@ -1,3 +1,5 @@
+NOTE: This Hello World example is taken from Wikipedia
+
 [ This program prints "Hello World!" and a newline to the screen; its
   length is 106 active command characters. [It is not the shortest.]
 
